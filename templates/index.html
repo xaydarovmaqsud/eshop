@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- ========================= SECTION MAIN ========================= -->
+{% include 'parts/banner.html' %}
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+<div class="container">
+
+<header class="section-heading">
+	<a href="{% url 'products' %}" class="btn btn-outline-primary float-right">See all</a>
+	<h3 class="section-title">Popular products</h3>
+</header><!-- sect-heading -->
+<div class="conteiner pl-5 pr-5">
+	{% include 'parts/carousel.html' with objects=products %}
+</div>
+<div class="row">
+
+</div> <!-- row.// -->
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+{% endblock %}

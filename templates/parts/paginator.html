@@ -1,0 +1,16 @@
+{% load static %}
+<nav class="mt-4" aria-label="Page navigation sample">
+    {% if paginator.num_pages > 1 %}
+    <ul class="pagination">
+
+        <li class="page-item {% if current_page == 1 %}disabled{% endif %}"><a class="page-link paging" data-value="{{ current_page|add:-1 }}">Previous</a></li>
+
+        {% for page in paginator.page_range %}
+        <li class="page-item {% if page == current_page %}active{% endif %}"><a class="page-link paging" data-value="{{ page }}">{{ page }}</a></li>
+        {% endfor %}
+
+        <li class="page-item {% if current_page == paginator.num_pages %}disabled{% endif %}"><a class="page-link paging" data-value="{{ current_page|add:1 }}">Next</a></li>
+
+    </ul>
+    {% endif %}
+</nav>

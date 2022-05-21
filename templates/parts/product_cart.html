@@ -1,0 +1,33 @@
+{% load static %}
+
+		<figure class="card card-product-grid">
+			<div class="img-wrap">
+				<img src="{{ object.imageURL }}">
+			</div> <!-- img-wrap.// -->
+			<figcaption class="info-wrap">
+				<div class="fix-height">
+					<a href="{% url 'product-detail' object.id %}" class="title">{{ object.name }}</a>
+					<div class="price-wrap mt-2">
+						<span class="price">${{ object.price }}</span>
+						<del class="price-old">$1980</del>
+					</div> <!-- price-wrap.// -->
+				</div>
+				<button id="pbtn{{ object.id }}"
+                        data-id="{{ object.id }}" class="add-cart btn btn-block
+				 {% if object.get_status == 'Add to cart' %}
+				 btn-primary
+				 {% elif object.get_status == 'Added to cart' %}
+				 btn-success
+				 {% else %}
+				 btn-warning
+				 {% endif %}
+                "
+
+                >{% if object.orders %}
+                    {{ object.get_status }}
+                {% else %}
+                    'Add to cart'
+                {% endif %}</button>
+{#				<a href="javascript:;" data-id="{{ object.id }}" class="add-cart btn btn-block btn-success">Added to cart </a>#}
+			</figcaption>
+		</figure>

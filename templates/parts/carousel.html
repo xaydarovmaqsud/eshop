@@ -1,0 +1,13 @@
+<div class="swiffy-slider slider-item-show3 slider-item-reveal slider-nav-dark slider-nav-outside-expand">
+    <ul class="slider-container py-4" id="slider2">
+        {% for product in product %}
+            <li>
+                 {% include 'parts/product_cart.html' with object=product %} <!-- col.// -->
+             </li>
+        {% endfor %}
+
+    </ul>
+
+    <button type="button" class="slider-nav" aria-label="Go to previous"></button>
+    <button type="button" class="slider-nav slider-nav-next" aria-label="Go to next"></button>
+</div>

@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{#    <!-- ========================= SECTION PAGETOP ========================= -->#}
+{#    <section class="section-pagetop bg" xmlns:paginator.per_page xmlns:paginator.per_page>#}
+{#        <div class="container">#}
+{#            <h2 class="title-page">Our Store</h2>#}
+{##}
+{#        </div> <!-- container //  -->#}
+{#    </section>#}
+{#    <!-- ========================= SECTION INTRO END// ========================= -->#}
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="section-content padding-y">
+        <div class="container">
+
+            <div class="row">
+                <aside class="col-md-3">
+
+                    <div class="card">
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true"
+                                   class="">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">Categories</h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse show" id="collapse_1" style="">
+                                <div class="card-body">
+
+                                    <ul class="list-menu">
+                                        {% for category in categories %}
+                                            <li><a class="select-category"
+                                                    {% if current_category == category.id %}
+                                                   style="color:#3167eb;font-weight: bold;"
+                                                    {% endif %}
+                                                   data-category="{{ category.id }}">{{ category.name }}
+                                            </a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div> <!-- card-body.// -->
+                            </div>
+                        </article> <!-- filter-group  .// -->
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true"
+                                   class="">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">Sizes </h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse show" id="collapse_4" style="">
+                                <div class="card-body">
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light"> XS </span>
+                                    </label>
+
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light"> SM </span>
+                                    </label>
+
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light"> LG </span>
+                                    </label>
+
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light"> XXL </span>
+                                    </label>
+                                </div><!-- card-body.// -->
+                            </div>
+                        </article> <!-- filter-group .// -->
+
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true"
+                                   class="">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">Price range </h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse show" id="collapse_3" style="">
+                                <div class="card-body">
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Min</label>
+                                            <!-- <input class="form-control" placeholder="$0" type="number"> -->
+                                            <input id="min_price" type="number" class="mr-2 form-control"
+                                                   value="{{ min_price }}">
+                                        </div>
+                                        <div class="form-group text-right col-md-6">
+                                            <label>Max</label>
+                                            <input id="max_price" type="number" class="mr-2 form-control"
+                                                   value="{{ max_price }}">
+                                        </div>
+                                    </div> <!-- form-row.// -->
+                                    <button class="btn btn-block price-filter btn-primary">Apply</button>
+                                </div><!-- card-body.// -->
+                            </div>
+                        </article> <!-- filter-group .// -->
+
+                    </div> <!-- card.// -->
+
+                </aside> <!-- col.// -->
+                <main class="col-md-9">
+
+                    <header class="border-bottom mb-4 pb-3">
+                        <div class="form-inline">
+                            <span class="mr-md-auto">32 Items found </span>
+                            <span class="mr-md-auto">Saralash </span>
+                            {% with p='arzon qimmat yangi eski' %}
+                                <select class="mr-2 sorting form-control">
+                                    {% for i in p.split %}
+                                        <option value="{{ i }}"
+                                                {% if sorting == i %}
+                                                selected
+                                                {% endif %}
+                                        >{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% endwith %}
+                            {% with p='6 9 12 15 18 21' %}
+                                <select class="mr-2 per-page form-control">
+                                    {% for i in p.split %}
+                                        <option value="{{ i }}"
+                                                {% if paginator.per_page|stringformat:'i' == i %}
+                                                selected
+                                                {% endif %}
+                                        >{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% endwith %}
+                        </div>
+                    </header><!-- sect-heading -->
+
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-md-4">
+                                {% include 'parts/product_cart.html' with object=product %}
+                            </div> <!-- col.// -->
+                        {% endfor %}
+                    </div> <!-- row end.// -->
+
+
+                    {% include 'parts/paginator.html' with paginator=paginator current_page=current_page %}
+
+                </main> <!-- col.// -->
+
+            </div>
+
+        </div> <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+{% endblock %}
